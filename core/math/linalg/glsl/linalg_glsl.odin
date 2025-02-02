@@ -1861,8 +1861,8 @@ dquatMulDvec3 :: proc "c" (q: dquat, v: dvec3) -> dvec3 {
 @(require_results) inverse_dmat2 :: proc "c" (m: dmat2) -> dmat2 { return inverse_matrix2x2(m) }
 @(require_results) inverse_dmat3 :: proc "c" (m: dmat3) -> dmat3 { return inverse_matrix3x3(m) }
 @(require_results) inverse_dmat4 :: proc "c" (m: dmat4) -> dmat4 { return inverse_matrix4x4(m) }
-@(require_results) inverse_quat  :: proc "c" (q: quat)  -> quat  { return 1/q }
-@(require_results) inverse_dquat :: proc "c" (q: dquat) -> dquat { return 1/q }
+@(require_results) inverse_quat  :: proc "c" (q: quat)  -> quat  { return conj(q) * quaternion(w=1/dot(q, q), x=0, y=0, z=0) }
+@(require_results) inverse_dquat :: proc "c" (q: dquat) -> dquat { return conj(q) * quaternion(w=1/dot(q, q), x=0, y=0, z=0) }
 
 
 transpose :: intrinsics.transpose
